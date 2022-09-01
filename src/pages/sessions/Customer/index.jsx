@@ -5,6 +5,7 @@ import Grid from '@mui/material/Grid';
 import Typography from "@mui/material/Typography";
 import GDSEButton from "../../../components/Home/Common/Button";
 import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
+import GDSEDataTable from "../../../components/Home/Common/Table";
 
 class Customer extends Component {
 
@@ -21,7 +22,31 @@ class Customer extends Component {
 
             data:[],
 
-            loaded: false
+            loaded: false,
+
+            columns: [
+                {
+                    field: 'name',
+                    headerName: 'Customer Name',
+                    width: 350
+                },
+                {
+                    field: 'gender',
+                    headerName: 'Gender',
+                    width: 350
+                },
+                {
+                    field: 'nic',
+                    headerName: 'NIC',
+                    width: 350
+                },
+                {
+                    field: 'email',
+                    headerName: 'Email',
+                    width: 350
+                }
+            ]
+
         }
     }
 
@@ -43,6 +68,7 @@ class Customer extends Component {
             data:formData
         })
         console.log(this.state.formData)
+        console.log(this.state.data)
     }
 
     render() {
@@ -121,16 +147,16 @@ class Customer extends Component {
                         </Grid>
                     </Grid>
                 </ValidatorForm>
-               {/* <Grid container style={{ height: 400, width: '100%', marginTop: '50px' }}>
+                <Grid container style={{ height: 400, width: '100%', marginTop: '50px'}}>
                     <GDSEDataTable
                         stickyHeader aria-label="sticky table"
                         columns={this.state.columns}
                         rows={this.state.data}
-                        rowsPerPageOptions={5}
-                        pageSize={5}
+                        rowsPerPageOptions={4}
+                        pageSize={4}
                         checkboxSelection={true}
                     />
-                </Grid>*/}
+                </Grid>
 
             </Fragment>
         )
