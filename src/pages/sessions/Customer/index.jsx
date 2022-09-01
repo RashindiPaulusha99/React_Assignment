@@ -2,7 +2,7 @@ import {withStyles} from "@mui/styles";
 import React, {Component, Fragment} from "react";
 import {styleSheet} from "./style";
 import Grid from '@mui/material/Grid';
-import Typography from "@mui/material/Typography";
+import {Link} from "react-router-dom";
 import GDSEButton from "../../../components/Home/Common/Button";
 import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 import GDSEDataTable from "../../../components/Home/Common/Table";
@@ -61,7 +61,7 @@ class Customer extends Component {
         })
     }
 
-    loadData =async (e)=>{
+    loadData =()=>{
         let formData = this.state.formData
         this.setState({
             loaded:true,
@@ -72,7 +72,7 @@ class Customer extends Component {
     }
 
     render() {
-
+        let { classes } = this.props
         return (
             <Fragment>
                 <ValidatorForm
@@ -81,11 +81,26 @@ class Customer extends Component {
                     onError={errors => console.log(errors)}
                 >
                     <Grid container spacing="12">
-                        <Grid item lg={12} md={12} sm={12} xm={12}
-                              style={{paddingLeft: '5%', paddingTop: '2%', paddingBottom: '1%'}}>
-                            <Typography variant="h3">Customer Manage</Typography>
-                        </Grid>
-                        <Grid item lg={6} md={6} sm={6} xm={6} style={{paddingLeft: '5%'}}>
+                        <div className={classes.title__container}>
+                            <Grid item lg={4} md={4} sm={4} xm={4} style={{paddingLeft: '3%', paddingTop: '2%',paddingBottom: '1%'}}>
+                                <GDSEButton variant="contained" label="DashBoard"/>
+                            </Grid>
+                            <Grid item lg={6} md={6} sm={6} xm={6} style={{paddingTop: '2%',paddingBottom: '1%'}}>
+                                <div style={{display:'flex',justifyContent:'flex-end'}}>
+                                    <div style={{paddingLeft: '12%'}}>
+                                        <Link to="/customer">
+                                            <GDSEButton variant="contained" label="Customer"/>
+                                        </Link>
+                                    </div>
+                                   <div style={{paddingLeft: '9%'}}>
+                                       <Link to="/item">
+                                           <GDSEButton variant="contained" label="Item" />
+                                       </Link>
+                                   </div>
+                                </div>
+                            </Grid>
+                        </div>
+                        <Grid item lg={6} md={6} sm={6} xm={6} style={{paddingLeft: '5%',paddingTop: '2%'}}>
                             <TextValidator id="outlined-basic" label="Customer Name" variant="outlined" size="small"
                                        style={{width: '90%'}}
                                            validators={['required','isString']}
@@ -97,7 +112,7 @@ class Customer extends Component {
                                            }}
                             />
                         </Grid>
-                        <Grid item lg={6} md={6} sm={6} xm={6}>
+                        <Grid item lg={6} md={6} sm={6} xm={6} style={{paddingTop: '2%'}}>
                             <TextValidator id="outlined-basic" label="Gender" variant="outlined" size="small"
                                        style={{width: '90%'}}
                                            validators={['required','isString']}
@@ -109,7 +124,7 @@ class Customer extends Component {
                                            }}
                             />
                         </Grid>
-                        <Grid item lg={6} md={6} sm={6} xm={6} style={{paddingLeft: '5%'}}>
+                        <Grid item lg={6} md={6} sm={6} xm={6} style={{paddingLeft: '5%',paddingTop: '2%'}}>
                             <TextValidator id="outlined-basic" label="Email" variant="outlined" size="small"
                                        style={{width: '90%'}}
                                            validators={['required','isEmail']}
@@ -121,7 +136,7 @@ class Customer extends Component {
                                            }}
                             />
                         </Grid>
-                        <Grid item lg={6} md={6} sm={6} xm={6}>
+                        <Grid item lg={6} md={6} sm={6} xm={6} style={{paddingTop: '2%'}}>
                             <TextValidator id="outlined-basic" label="NIC" variant="outlined" size="small"
                                        style={{width: '90%'}}
                                            validators={['required','isString']}
@@ -139,7 +154,10 @@ class Customer extends Component {
                                 <GDSEButton variant="contained" label="Clear" color='error' onClick={this.clearFields}/>
                             </div>
                             <div>
-                                <GDSEButton variant="contained" label="Save" type="submit" />
+                                <GDSEButton variant="contained" label="Save" type="submit"
+                                            onClick={()=>{
+                                                this.loadData()
+                                            }}/>
                             </div>
                         </Grid>
                         <Grid item lg={12} md={12} sm={12} xm={12}>
