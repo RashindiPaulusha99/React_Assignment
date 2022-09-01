@@ -1,6 +1,7 @@
 import {withStyles} from "@mui/styles";
 import React, {Component, Fragment} from "react";
 import {styleSheet} from "./style";
+import Grid from '@mui/material/Grid';
 import Typography from "@mui/material/Typography";
 import GDSEButton from "../../../components/Home/Common/Button";
 import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
@@ -36,10 +37,12 @@ class Customer extends Component {
     }
 
     loadData =async (e)=>{
+        let formData = this.state.formData
         this.setState({
             loaded:true,
-            data:promise.data
+            data:formData
         })
+        console.log(this.state.formData)
     }
 
     render() {
@@ -118,7 +121,7 @@ class Customer extends Component {
                         </Grid>
                     </Grid>
                 </ValidatorForm>
-                <Grid container style={{ height: 400, width: '100%', marginTop: '50px' }}>
+               {/* <Grid container style={{ height: 400, width: '100%', marginTop: '50px' }}>
                     <GDSEDataTable
                         stickyHeader aria-label="sticky table"
                         columns={this.state.columns}
@@ -127,17 +130,8 @@ class Customer extends Component {
                         pageSize={5}
                         checkboxSelection={true}
                     />
-                </Grid>
-                <GDSESnackBar
-                    open={this.state.open}
-                    onClose={() => {
-                        this.setState({ open: false })
-                    }}
-                    message={this.state.message}
-                    autoHideDuration={3000}
-                    severity={this.state.severity}
-                    variant="filled"
-                />
+                </Grid>*/}
+
             </Fragment>
         )
     }
