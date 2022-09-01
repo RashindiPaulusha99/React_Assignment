@@ -1,22 +1,21 @@
 import {withStyles} from "@mui/styles";
 import React, {Component, Fragment} from "react";
+import {styleSheet} from "./style";
 import Typography from "@mui/material/Typography";
 import GDSEButton from "../../../components/Home/Common/Button";
 import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 
-class UserRegister extends Component {
+class Customer extends Component {
 
     constructor(props) {
         super(props);
 
         this.state = {
             formData:{
-                firstName:"",
-                lastName:"",
-                age:"",
-                phone:"",
-                address:"",
-                nic:""
+                name:"",
+                gender:"",
+                nic:"",
+                email:""
             },
 
             data:[],
@@ -28,35 +27,20 @@ class UserRegister extends Component {
     clearFields = ()=>{
         this.setState({
             formData:{
-                firstName:"",
-                lastName:"",
-                age:"",
-                phone:"",
-                address:"",
-                nic:""
+                name:"",
+                gender:"",
+                nic:"",
+                email:""
             }
         })
     }
 
-    submitUser= async (e) =>{
-        let formData = this.state.formData
-
-        let res = await registerService.registerPost(formData);
-        if(res.status === 200){
-            this.setState({
-                open:true,
-                message:'User Saved!',
-                severity:'success'
-            });
-            this.clearFields();
-        }else {
-            this.setState({
-                open:true,
-                message:'User Saved Unsuccessful!',
-                severity:'error'
-            });
-        }
-    };
+    loadData =async (e)=>{
+        this.setState({
+            loaded:true,
+            data:promise.data
+        })
+    }
 
     render() {
 
@@ -64,7 +48,7 @@ class UserRegister extends Component {
             <Fragment>
                 <ValidatorForm
                     ref="form"
-                    onSubmit={this.submitUser}
+                    onSubmit={this.loadData}
                     onError={errors => console.log(errors)}
                 >
                     <Grid container spacing="12">
@@ -73,25 +57,25 @@ class UserRegister extends Component {
                             <Typography variant="h3">Customer Manage</Typography>
                         </Grid>
                         <Grid item lg={6} md={6} sm={6} xm={6} style={{paddingLeft: '5%'}}>
-                            <TextValidator id="outlined-basic" label="First Name" variant="outlined" size="small"
+                            <TextValidator id="outlined-basic" label="Customer Name" variant="outlined" size="small"
                                        style={{width: '90%'}}
                                            validators={['required','isString']}
-                                           value={this.state.formData.name.firstName}
+                                           value={this.state.formData.name}
                                            onChange={(e)=>{
                                                let data=this.state.formData
-                                               data.name.firstName=e.target.value
+                                               data.name=e.target.value
                                                this.setState(data);
                                            }}
                             />
                         </Grid>
                         <Grid item lg={6} md={6} sm={6} xm={6}>
-                            <TextValidator id="outlined-basic" label="Last Name" variant="outlined" size="small"
+                            <TextValidator id="outlined-basic" label="Gender" variant="outlined" size="small"
                                        style={{width: '90%'}}
                                            validators={['required','isString']}
-                                           value={this.state.formData.name.lastName}
+                                           value={this.state.formData.gender}
                                            onChange={(e)=>{
                                                let data=this.state.formData
-                                               data.name.lastName=e.target.value
+                                               data.gender=e.target.value
                                                this.setState(data);
                                            }}
                             />
@@ -109,109 +93,13 @@ class UserRegister extends Component {
                             />
                         </Grid>
                         <Grid item lg={6} md={6} sm={6} xm={6}>
-                            <TextValidator id="outlined-basic" label="User Name" variant="outlined" size="small"
+                            <TextValidator id="outlined-basic" label="NIC" variant="outlined" size="small"
                                        style={{width: '90%'}}
                                            validators={['required','isString']}
-                                           value={this.state.formData.username}
+                                           value={this.state.formData.nic}
                                            onChange={(e)=>{
                                                let data=this.state.formData
-                                               data.username=e.target.value
-                                               this.setState(data);
-                                           }}
-                            />
-                        </Grid>
-                        <Grid item lg={6} md={6} sm={6} xm={6} style={{paddingLeft: '5%'}}>
-                            <TextValidator id="outlined-basic" type="password" label="Password" variant="outlined" size="small"
-                                       style={{width: '90%'}}
-                                           validators={['required','isString']}
-                                           value={this.state.formData.password}
-                                           onChange={(e)=>{
-                                               let data=this.state.formData
-                                               data.password=e.target.value
-                                               this.setState(data);
-                                           }}
-                            />
-                        </Grid>
-                        <Grid item lg={6} md={6} sm={6} xm={6}>
-                            <TextValidator id="outlined-basic" label="City" variant="outlined" size="small"
-                                       style={{width: '90%'}}
-                                           validators={['required','isString']}
-                                           value={this.state.formData.address.city}
-                                           onChange={(e)=>{
-                                               let data=this.state.formData
-                                               data.address.city=e.target.value
-                                               this.setState(data);
-                                           }}
-                            />
-                        </Grid>
-                        <Grid item lg={6} md={6} sm={6} xm={6} style={{paddingLeft: '5%'}}>
-                            <TextValidator id="outlined-basic" label="Street" variant="outlined" size="small"
-                                       style={{width: '90%'}}
-                                           validators={['required','isString']}
-                                           value={this.state.formData.address.street}
-                                           onChange={(e)=>{
-                                               let data=this.state.formData
-                                               data.address.street=e.target.value
-                                               this.setState(data);
-                                           }}
-                            />
-                        </Grid>
-                        <Grid item lg={6} md={6} sm={6} xm={6}>
-                            <TextValidator id="outlined-basic" label="Street NO" variant="outlined" size="small"
-                                       style={{width: '90%'}}
-                                           validators={['required','isPositive']}
-                                           value={this.state.formData.address.number}
-                                           onChange={(e)=>{
-                                               let data=this.state.formData
-                                               data.address.number=e.target.value
-                                               this.setState(data);
-                                           }}
-                            />
-                        </Grid>
-                        <Grid item lg={6} md={6} sm={6} xm={6} style={{paddingLeft: '5%'}}>
-                            <TextValidator id="outlined-basic" label="Zip Code" variant="outlined" size="small"
-                                       style={{width: '90%'}}
-                                           validators={['required','isPositive']}
-                                           value={this.state.formData.address.zipCode}
-                                           onChange={(e)=>{
-                                               let data=this.state.formData
-                                               data.address.zipCode=e.target.value
-                                               this.setState(data);
-                                           }}
-                            />
-                        </Grid>
-                        <Grid item lg={6} md={6} sm={6} xm={6}>
-                            <TextValidator id="outlined-basic" label="Lat Value" variant="outlined" size="small"
-                                       style={{width: '90%'}}
-                                           validators={['required','isPositive']}
-                                           value={this.state.formData.address.geolocation.latValue}
-                                           onChange={(e)=>{
-                                               let data=this.state.formData
-                                               data.address.geolocation.latValue=e.target.value
-                                               this.setState(data);
-                                           }}
-                            />
-                        </Grid>
-                        <Grid item lg={6} md={6} sm={6} xm={6} style={{paddingLeft: '5%'}}>
-                            <TextValidator id="outlined-basic" label="Long Value" variant="outlined" size="small"
-                                       style={{width: '90%'}}
-                                           validators={['required','isPositive']}
-                                           value={this.state.formData.address.geolocation.longValue}
-                                           onChange={(e)=>{
-                                               let data=this.state.formData
-                                               data.address.geolocation.longValue=e.target.value
-                                               this.setState(data);
-                                           }}
-                            />
-                        </Grid>
-                        <Grid item lg={6} md={6} sm={6} xm={6}>
-                            <TextValidator id="outlined-basic" label="Mobile NO" variant="outlined" size="small"
-                                       style={{width: '90%'}}
-                                           validators={['required','isPositive']}
-                                           value={this.state.formData.phone}
-                                           onChange={(e)=>{
-                                               let data=this.state.formData
-                                               data.phone=e.target.value
+                                               data.nic=e.target.value
                                                this.setState(data);
                                            }}
                             />
@@ -253,7 +141,8 @@ class UserRegister extends Component {
             </Fragment>
         )
     }
-
 }
 
-export default withStyles(styleSheet)(UserRegister)
+
+
+export default withStyles(styleSheet)(Customer)
