@@ -7,7 +7,7 @@ import GDSEButton from "../../../components/Home/Common/Button";
 import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 import GDSEDataTable from "../../../components/Home/Common/Table";
 
-class Customer extends Component {
+class Item extends Component {
 
     constructor(props) {
         super(props);
@@ -15,9 +15,9 @@ class Customer extends Component {
         this.state = {
             formData:{
                 name:"",
-                gender:"",
-                nic:"",
-                email:""
+                description:"",
+                price:"",
+                qtyOnHand:""
             },
 
             data:[],
@@ -27,22 +27,22 @@ class Customer extends Component {
             columns: [
                 {
                     field: 'name',
-                    headerName: 'Customer Name',
+                    headerName: 'Item Name',
                     width: 350
                 },
                 {
-                    field: 'gender',
-                    headerName: 'Gender',
+                    field: 'description',
+                    headerName: 'Description',
                     width: 350
                 },
                 {
-                    field: 'nic',
-                    headerName: 'NIC',
+                    field: 'price',
+                    headerName: 'Unit Price',
                     width: 350
                 },
                 {
-                    field: 'email',
-                    headerName: 'Email',
+                    field: 'qtyOnHand',
+                    headerName: 'Qty On Hand',
                     width: 350
                 }
             ]
@@ -54,9 +54,9 @@ class Customer extends Component {
         this.setState({
             formData:{
                 name:"",
-                gender:"",
-                nic:"",
-                email:""
+                description:"",
+                price:"",
+                qtyOnHand:""
             }
         })
     }
@@ -86,7 +86,7 @@ class Customer extends Component {
                                 <Link to="/dash">
                                     <GDSEButton variant="contained" label="DashBoard"/>
                                 </Link>
-                            </Grid>
+                                </Grid>
                             <Grid item lg={6} md={6} sm={6} xm={6} style={{paddingTop: '2%',paddingBottom: '1%'}}>
                                 <div style={{display:'flex',justifyContent:'flex-end'}}>
                                     <div style={{paddingLeft: '12%'}}>
@@ -103,7 +103,7 @@ class Customer extends Component {
                             </Grid>
                         </div>
                         <Grid item lg={6} md={6} sm={6} xm={6} style={{paddingLeft: '5%',paddingTop: '2%'}}>
-                            <TextValidator id="outlined-basic" label="Customer Name" variant="outlined" size="small"
+                            <TextValidator id="outlined-basic" label="Item Name" variant="outlined" size="small"
                                        style={{width: '90%'}}
                                            validators={['required','isString']}
                                            value={this.state.formData.name}
@@ -115,37 +115,37 @@ class Customer extends Component {
                             />
                         </Grid>
                         <Grid item lg={6} md={6} sm={6} xm={6} style={{paddingTop: '2%'}}>
-                            <TextValidator id="outlined-basic" label="Gender" variant="outlined" size="small"
+                            <TextValidator id="outlined-basic" label="Description" variant="outlined" size="small"
                                        style={{width: '90%'}}
                                            validators={['required','isString']}
-                                           value={this.state.formData.gender}
+                                           value={this.state.formData.description}
                                            onChange={(e)=>{
                                                let data=this.state.formData
-                                               data.gender=e.target.value
+                                               data.description=e.target.value
                                                this.setState(data);
                                            }}
                             />
                         </Grid>
                         <Grid item lg={6} md={6} sm={6} xm={6} style={{paddingLeft: '5%',paddingTop: '2%'}}>
-                            <TextValidator id="outlined-basic" label="Email" variant="outlined" size="small"
+                            <TextValidator id="outlined-basic" label="Unit Price" variant="outlined" size="small"
                                        style={{width: '90%'}}
-                                           validators={['required','isEmail']}
-                                           value={this.state.formData.email}
+                                           validators={['required','isPositive']}
+                                           value={this.state.formData.price}
                                            onChange={(e)=>{
                                                let data=this.state.formData
-                                               data.email=e.target.value
+                                               data.price=e.target.value
                                                this.setState(data);
                                            }}
                             />
                         </Grid>
                         <Grid item lg={6} md={6} sm={6} xm={6} style={{paddingTop: '2%'}}>
-                            <TextValidator id="outlined-basic" label="NIC" variant="outlined" size="small"
+                            <TextValidator id="outlined-basic" label="Qty On Hand" variant="outlined" size="small"
                                        style={{width: '90%'}}
-                                           validators={['required','isString']}
-                                           value={this.state.formData.nic}
+                                           validators={['required','isPositive']}
+                                           value={this.state.formData.qtyOnHand}
                                            onChange={(e)=>{
                                                let data=this.state.formData
-                                               data.nic=e.target.value
+                                               data.qtyOnHand=e.target.value
                                                this.setState(data);
                                            }}
                             />
@@ -185,4 +185,4 @@ class Customer extends Component {
 
 
 
-export default withStyles(styleSheet)(Customer)
+export default withStyles(styleSheet)(Item)
