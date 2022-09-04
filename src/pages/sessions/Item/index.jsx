@@ -14,6 +14,7 @@ class Item extends Component {
 
         this.state = {
             formData:{
+                id:"",
                 name:"",
                 description:"",
                 price:"",
@@ -26,25 +27,39 @@ class Item extends Component {
 
             columns: [
                 {
+                    field: 'id',
+                    headerName: 'Item Code',
+                    width: 300
+                },
+                {
                     field: 'name',
                     headerName: 'Item Name',
-                    width: 350
+                    width: 300
                 },
                 {
                     field: 'description',
                     headerName: 'Description',
-                    width: 350
+                    width: 300
                 },
                 {
                     field: 'price',
                     headerName: 'Unit Price',
-                    width: 350
+                    width: 300
                 },
                 {
                     field: 'qtyOnHand',
                     headerName: 'Qty On Hand',
-                    width: 350
+                    width: 300
                 }
+            ],
+
+            rows : [
+                { id: 'C001',name: 'Jon', description: 'male', price: '123654v', qtyOnHand: 'Jon@gmail.com' },
+                { id: 'C002',name: 'jane', gender: 'female', nic: '58452v', email: 'Jane@gmail.com' },
+                { id: 'C003',name: 'kamal', gender: 'male', nic: '79851v', email: 'kamal@gmail.com' },
+                { id: 'C004',name: 'nimal', gender: 'male', nic: '94212v', email: 'nimal@gmail.com' },
+                { id: 'C005',name: 'amal', gender: 'male', nic: '86412v', email: 'amal@gmail.com' },
+                { id: 'C006',name: 'amaya', gender: 'female', nic: '24552v', email: 'amaya@gmail.com' }
             ]
 
         }
@@ -53,6 +68,7 @@ class Item extends Component {
     clearFields = ()=>{
         this.setState({
             formData:{
+                id:"",
                 name:"",
                 description:"",
                 price:"",
