@@ -4,7 +4,6 @@ import {styleSheet} from "./style";
 import Grid from '@mui/material/Grid';
 import {Link} from "react-router-dom";
 import GDSEButton from "../../../components/Home/Common/Button";
-import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 
 class DashBoard extends Component {

@@ -14,7 +14,9 @@ class Customer extends Component {
 
         this.state = {
             formData:{
+                id:"",
                 name:"",
+                address:"",
                 gender:"",
                 nic:"",
                 email:""
@@ -26,25 +28,44 @@ class Customer extends Component {
 
             columns: [
                 {
+                    field: 'id',
+                    headerName: 'Customer Id',
+                    width: 200
+                },
+                {
                     field: 'name',
                     headerName: 'Customer Name',
-                    width: 350
+                    width: 250
+                },
+                {
+                    field: 'address',
+                    headerName: 'Address',
+                    width: 250
                 },
                 {
                     field: 'gender',
                     headerName: 'Gender',
-                    width: 350
+                    width: 250
                 },
                 {
                     field: 'nic',
                     headerName: 'NIC',
-                    width: 350
+                    width: 250
                 },
                 {
                     field: 'email',
                     headerName: 'Email',
-                    width: 350
+                    width: 250
                 }
+            ],
+
+            rows : [
+                { id: 'C001',name: 'Jon', gender: 'male', nic: '123654v', email: 'Jon@gmail.com' },
+                { id: 'C002',name: 'jane', gender: 'female', nic: '58452v', email: 'Jane@gmail.com' },
+                { id: 'C003',name: 'kamal', gender: 'male', nic: '79851v', email: 'kamal@gmail.com' },
+                { id: 'C004',name: 'nimal', gender: 'male', nic: '94212v', email: 'nimal@gmail.com' },
+                { id: 'C005',name: 'amal', gender: 'male', nic: '86412v', email: 'amal@gmail.com' },
+                { id: 'C006',name: 'amaya', gender: 'female', nic: '24552v', email: 'amaya@gmail.com' }
             ]
 
         }
@@ -53,7 +74,9 @@ class Customer extends Component {
     clearFields = ()=>{
         this.setState({
             formData:{
+                id:"",
                 name:"",
+                address:"",
                 gender:"",
                 nic:"",
                 email:""
@@ -77,7 +100,7 @@ class Customer extends Component {
             <Fragment>
                 <ValidatorForm
                     ref="form"
-                    onSubmit={this.loadData}
+
                     onError={errors => console.log(errors)}
                 >
                     <Grid container spacing="12">
@@ -103,6 +126,18 @@ class Customer extends Component {
                             </Grid>
                         </div>
                         <Grid item lg={6} md={6} sm={6} xm={6} style={{paddingLeft: '5%',paddingTop: '2%'}}>
+                            <TextValidator id="outlined-basic" label="Customer Id" variant="outlined" size="small"
+                                           style={{width: '90%'}}
+                                           validators={['required','isString']}
+                                           value={this.state.formData.id}
+                                           onChange={(e)=>{
+                                               let data=this.state.formData
+                                               data.id=e.target.value
+                                               this.setState(data);
+                                           }}
+                            />
+                        </Grid>
+                        <Grid item lg={6} md={6} sm={6} xm={6} style={{paddingTop: '2%'}}>
                             <TextValidator id="outlined-basic" label="Customer Name" variant="outlined" size="small"
                                        style={{width: '90%'}}
                                            validators={['required','isString']}
@@ -110,6 +145,18 @@ class Customer extends Component {
                                            onChange={(e)=>{
                                                let data=this.state.formData
                                                data.name=e.target.value
+                                               this.setState(data);
+                                           }}
+                            />
+                        </Grid>
+                        <Grid item lg={6} md={6} sm={6} xm={6} style={{paddingLeft: '5%',paddingTop: '2%'}}>
+                            <TextValidator id="outlined-basic" label="Address" variant="outlined" size="small"
+                                           style={{width: '90%'}}
+                                           validators={['required','isString']}
+                                           value={this.state.formData.address}
+                                           onChange={(e)=>{
+                                               let data=this.state.formData
+                                               data.address=e.target.value
                                                this.setState(data);
                                            }}
                             />
@@ -158,7 +205,7 @@ class Customer extends Component {
                             <div>
                                 <GDSEButton variant="contained" label="Save" type="submit"
                                             onClick={()=>{
-                                                this.loadData()
+                                                this.loadData();
                                             }}/>
                             </div>
                         </Grid>
@@ -167,13 +214,13 @@ class Customer extends Component {
                         </Grid>
                     </Grid>
                 </ValidatorForm>
-                <Grid container style={{ height: 400, width: '100%', marginTop: '50px'}}>
+                <Grid container style={{ height: 400, width: '100%', marginTop: '30px'}}>
                     <GDSEDataTable
                         stickyHeader aria-label="sticky table"
-                        columns={this.state.columns}
                         rows={this.state.data}
-                        rowsPerPageOptions={4}
-                        pageSize={4}
+                        columns={this.state.columns}
+                        pageSize={5}
+                        rowsPerPageOptions={5}
                         checkboxSelection={true}
                     />
                 </Grid>
