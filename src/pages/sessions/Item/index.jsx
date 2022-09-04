@@ -54,12 +54,12 @@ class Item extends Component {
             ],
 
             rows : [
-                { id: 'C001',name: 'Jon', description: 'male', price: '123654v', qtyOnHand: 'Jon@gmail.com' },
-                { id: 'C002',name: 'jane', gender: 'female', nic: '58452v', email: 'Jane@gmail.com' },
-                { id: 'C003',name: 'kamal', gender: 'male', nic: '79851v', email: 'kamal@gmail.com' },
-                { id: 'C004',name: 'nimal', gender: 'male', nic: '94212v', email: 'nimal@gmail.com' },
-                { id: 'C005',name: 'amal', gender: 'male', nic: '86412v', email: 'amal@gmail.com' },
-                { id: 'C006',name: 'amaya', gender: 'female', nic: '24552v', email: 'amaya@gmail.com' }
+                { id: 'I001',name: 'soap', description: 'description1', price: 100.00, qtyOnHand: 520 },
+                { id: 'I002',name: 'rice', description: 'description2', price: 200.00, qtyOnHand: 1000 },
+                { id: 'I003',name: 'coconut', description: 'description3', price:232.00, qtyOnHand: 2000 },
+                { id: 'I004',name: 'oil', description: 'description4', price: 500.00, qtyOnHand: 8000},
+                { id: 'I005',name: 'biscuit', description: 'description5', price: 300.00, qtyOnHand:900 },
+                { id: 'I006',name: 'milk', description: 'description6', price: 150.00, qtyOnHand: 50 }
             ]
 
         }
@@ -93,7 +93,6 @@ class Item extends Component {
             <Fragment>
                 <ValidatorForm
                     ref="form"
-                    onSubmit={this.loadData}
                     onError={errors => console.log(errors)}
                 >
                     <Grid container spacing="12">
@@ -119,6 +118,18 @@ class Item extends Component {
                             </Grid>
                         </div>
                         <Grid item lg={6} md={6} sm={6} xm={6} style={{paddingLeft: '5%',paddingTop: '2%'}}>
+                            <TextValidator id="outlined-basic" label="Item Code" variant="outlined" size="small"
+                                           style={{width: '90%'}}
+                                           validators={['required','isString']}
+                                           value={this.state.formData.id}
+                                           onChange={(e)=>{
+                                               let data=this.state.formData
+                                               data.id=e.target.value
+                                               this.setState(data);
+                                           }}
+                            />
+                        </Grid>
+                        <Grid item lg={6} md={6} sm={6} xm={6} style={{paddingTop: '2%'}}>
                             <TextValidator id="outlined-basic" label="Item Name" variant="outlined" size="small"
                                        style={{width: '90%'}}
                                            validators={['required','isString']}
@@ -130,7 +141,7 @@ class Item extends Component {
                                            }}
                             />
                         </Grid>
-                        <Grid item lg={6} md={6} sm={6} xm={6} style={{paddingTop: '2%'}}>
+                        <Grid item lg={6} md={6} sm={6} xm={6} style={{paddingLeft: '5%',paddingTop: '2%'}}>
                             <TextValidator id="outlined-basic" label="Description" variant="outlined" size="small"
                                        style={{width: '90%'}}
                                            validators={['required','isString']}
@@ -142,7 +153,7 @@ class Item extends Component {
                                            }}
                             />
                         </Grid>
-                        <Grid item lg={6} md={6} sm={6} xm={6} style={{paddingLeft: '5%',paddingTop: '2%'}}>
+                        <Grid item lg={6} md={6} sm={6} xm={6} style={{paddingTop: '2%'}}>
                             <TextValidator id="outlined-basic" label="Unit Price" variant="outlined" size="small"
                                        style={{width: '90%'}}
                                            validators={['required','isPositive']}
@@ -154,7 +165,7 @@ class Item extends Component {
                                            }}
                             />
                         </Grid>
-                        <Grid item lg={6} md={6} sm={6} xm={6} style={{paddingTop: '2%'}}>
+                        <Grid item lg={6} md={6} sm={6} xm={6} style={{paddingLeft: '5%',paddingTop: '2%'}}>
                             <TextValidator id="outlined-basic" label="Qty On Hand" variant="outlined" size="small"
                                        style={{width: '90%'}}
                                            validators={['required','isPositive']}
@@ -186,10 +197,10 @@ class Item extends Component {
                 <Grid container style={{ height: 400, width: '100%', marginTop: '50px'}}>
                     <GDSEDataTable
                         stickyHeader aria-label="sticky table"
+                        rows={this.state.rows}
                         columns={this.state.columns}
-                        rows={this.state.data}
-                        rowsPerPageOptions={4}
-                        pageSize={4}
+                        rowsPerPageOptions={6}
+                        pageSize={6}
                         checkboxSelection={true}
                     />
                 </Grid>

@@ -219,8 +219,8 @@ class Customer extends Component {
                         stickyHeader aria-label="sticky table"
                         rows={this.state.rows}
                         columns={this.state.columns}
-                        pageSize={5}
-                        rowsPerPageOptions={5}
+                        pageSize={6}
+                        rowsPerPageOptions={6}
                         checkboxSelection={true}
                     />
                 </Grid>
